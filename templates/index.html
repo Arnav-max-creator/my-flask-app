@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whispers of change</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loading-content">
+            <h1 id="loading-text">This tool is for people who have been affected by natural disasters.....</h1>
+            <button id="start-button">Let's start</button>
+        </div>
+    </div>
+    <div id="main-content">
+
+        <div class="emotion-container">
+            <h1>How are you feeling right now?</h1>
+            <select class="emotion-dropdown" id="emotionDropdown">
+                <option value="" disabled selected>Select an emotion</option>
+                <option value="Anger">Anger</option>
+                <option value="Fear">Fear</option>
+                <option value="Sadness">Sadness</option>
+                <option value="Anxiety">Anxiety</option>
+                <option value="Guilt">Guilt</option>
+            </select>
+            <button class="get-recommendations-button" onclick="showRecommendations()">Get Recommendations</button>
+            <button class="get-videos-button" onclick="getVideos()">Get Videos</button>
+            <div id="loading" class="loading-spinner" style="display: none;"></div>
+        </div>
+        <div class="recommendations" id="recommendationText"></div>
+        <button class="read-aloud-button" onclick="readAloud()" style="display: none;">Read Aloud</button>
+        <button class="stop-reading-button" onclick="stopReading()" style="display: none;">Stop Reading</button>
+        <div class="videos" id="videos"></div>
+        <button class="high-contrast-button" onclick="toggleHighContrast()">Enable High Contrast Mode</button>
+
+    </div>
+    
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

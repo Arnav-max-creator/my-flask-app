@@ -1,0 +1,659 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Ensure relative positioning for absolute child */
+    color: #333; /* Default text color */
+    animation: flyIn 1s ease-in-out forwards;
+}
+
+@keyframes flyIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.emotion-container, .recommendations, .videos, .high-contrast-button, .read-aloud-button {
+    opacity: 0;
+    animation: flyIn 1s ease-in-out forwards;
+    animation-delay: 0.2s;
+}
+
+.high-contrast-button{
+    position: fixed;
+    bottom: -320px;
+    right: -320px;
+}
+
+.loading-spinner {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.emotion-container {
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 9px;
+}
+
+.emotion-dropdown, .get-recommendations-button, .get-videos-button, .high-contrast-button{
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+#start-button{
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+#start-button:hover{
+    background-color: #2980b9;
+}
+
+.emotion-dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.emotion-container button:hover, .high-contrast-button:hover{
+    background-color: #2980b9;
+}
+
+.recommendations {
+    display: none; /* Hidden by default */
+    margin-top: 20px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    color: #333; /* Default text color */
+}
+
+.recommendations p {
+    margin-bottom: 10px;
+}
+
+.recommendations button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #e74c3c; /* Red background color */
+    color: #fff; /* White text color */
+    transition: background-color 0.3s ease;
+}
+
+.high-contrast .recommendations button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .recommendations button:hover {
+    background-color: black;
+    color: yellow;
+}
+
+.recommendations button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.videos {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Gap between videos */
+    justify-content: center;
+    position: relative; /* Ensure relative positioning for absolute child */
+}
+
+.video {
+    position: relative;
+    width: 100%; /* Full width */
+    max-width: 100%; /* Ensure videos don't stretch */
+}
+
+.video iframe {
+    width: 100%;
+    height: 180px; /* Adjust height as needed */
+}
+
+.video-heading {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* High contrast mode */
+.high-contrast {
+    background-color: black;
+    color: yellow;
+}
+
+.high-contrast .emotion-container,
+.high-contrast .emotion-dropdown {
+    background-color: #555;
+}
+
+.high-contrast .get-recommendations-button,
+.high-contrast .get-videos-button,
+.high-contrast .read-aloud-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .get-recommendations-button:hover,
+.high-contrast .get-videos-button:hover,
+.high-contrast .read-aloud-button:hover,
+.high-contrast .high-contrast-button:hover {
+    background-color: #333;
+}
+
+.high-contrast .recommendations {
+    display: none; /* Hidden by default */
+    margin-top: 20px;
+    text-align: center;
+    background-color: #555;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    color: white;
+}
+
+.high-contrast .recommendations {
+    background-color: #555;
+    color: #fff; /* Text color for high contrast mode */
+}
+
+.high-contrast .emotion-dropdown {
+    background-color: #555;
+    color: #fff; /* Adjust text color for high contrast mode */
+}
+
+.high-contrast .high-contrast-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .high-contrast-button:hover {
+    color: yellow;
+}
+
+.high-contrast .get-recommendations-button:hover {
+    color: yellow;
+}
+
+.high-contrast .get-videos-button:hover {
+    color: yellow;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 800px) {
+    .videos {
+        grid-template-columns: 1fr; /* 1 column for smaller screens */
+    }
+}
+.read-aloud-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #e67e22; /* Orange background color */
+    color: #fff; /* White text color */
+}
+
+.high-contrast .read-aloud-button:hover{
+    background-color: #333;
+    color: yellow;
+}
+
+
+
+
+/* No changes needed for the CSS based on your current requests. */
+.loading-spinner {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.read-aloud-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #e67e22; /* Orange background color */
+    color: #fff; /* White text color */
+}
+
+.high-contrast .read-aloud-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .read-aloud-button:hover {
+    background-color: #333;
+    color: yellow;
+}
+
+.stop-reading-button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #c0392b; /* Dark red */
+    color: #fff; /* White text color */
+}
+
+.high-contrast .stop-reading-button {
+    background-color: orange; /* Change to orange in high contrast mode */
+    color: black; /* Change text color in high contrast mode */
+}
+
+.high-contrast .stop-reading-button:hover {
+    background-color: yellow;
+    color: black;
+}
+
+
+.high-contrast .read-aloud-button:hover{
+    background-color: #333;
+    color: yellow;
+}
+
+.recommendations {
+    /* Existing styles... */
+    color: #333; /* Default text color */
+}
+
+.recommendations.highlighted {
+    background-color: yellow;
+}
+
+.high-contrast .recommendations.highlighted {
+    background-color: orange;
+}
+
+
+.stop-reading-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #c0392b; /* Red background color */
+    color: #fff; /* White text color */
+    transition: background-color 0.3s ease;
+}
+
+.high-contrast .stop-reading-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .stop-reading-button:hover {
+    background-color: #333;
+    color: yellow;
+}
+.high-contrast-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.loading-spinner {
+    width: 30px;  /* Decreased size */
+    height: 30px; /* Decreased size */
+}
+
+/* Highlighted text styles */
+.recommendations .highlighted {
+    background-color: yellow;
+}
+
+.high-contrast .recommendations .highlighted {
+    background-color: orange;
+}
+
+.stop-reading-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #c0392b; /* Red background color */
+    color: #fff; /* White text color */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    bottom: 5px;
+}
+
+.high-contrast .stop-reading-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .stop-reading-button:hover {
+    background-color: #333;
+}
+
+/* Hide read aloud button initially */
+.read-aloud-button {
+    display: none;
+}
+.high-contrast .recommendations{
+    color: yellow;
+}
+
+/* Base styles */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Other existing styles... */
+
+
+.high-contrast-button:hover {
+    background-color: #444;
+}
+
+.high-contrast .high-contrast-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .high-contrast-button:hover {
+    background-color: #333;
+}
+
+.loading-spinner {
+    width: 30px;  /* Decreased size */
+    height: 30px; /* Decreased size */
+    display: inline-block;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin-left: 10px; /* Add margin to separate from other elements */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Highlighted text styles */
+.recommendations .highlighted {
+    background-color: yellow;
+}
+
+.high-contrast .recommendations .highlighted {
+    background-color: orange;
+}
+
+.stop-reading-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #c0392b; /* Red background color */
+    color: #fff; /* White text color */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.high-contrast .stop-reading-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .stop-reading-button:hover {
+    background-color: #333;
+}
+
+/* Hide read aloud button initially */
+.read-aloud-button {
+    display: none;
+}
+
+/* Error box */
+.error-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ff6666;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+/* Responsive design... */
+/* Base styles */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Other existing styles... */
+
+.high-contrast-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.high-contrast-button:hover {
+    background-color: #444;
+}
+
+.high-contrast .high-contrast-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .high-contrast-button:hover {
+    background-color: #333;
+}
+
+.loading-spinner {
+    width: 30px;  /* Decreased size */
+    height: 30px; /* Decreased size */
+    display: inline-block;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin-left: 10px; /* Add margin to separate from other elements */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Highlighted text styles */
+.recommendations .highlighted {
+    background-color: yellow;
+}
+
+.high-contrast .recommendations .highlighted {
+    background-color: orange;
+}
+
+.stop-reading-button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #c0392b; /* Red background color */
+    color: #fff; /* White text color */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.high-contrast .stop-reading-button {
+    background-color: yellow;
+    color: black;
+}
+
+.high-contrast .stop-reading-button:hover {
+    background-color: #333;
+}
+
+/* Hide read aloud button initially */
+.read-aloud-button {
+    display: none;
+}
+
+/* Error box */
+.error-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ff6666;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    opacity: 1;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* styles.css */
+
+/* Loading screen styles */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.loading-content {
+    text-align: center;
+}
+
+#loading-text {
+    font-size: 24px; /* Adjust as needed */
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Main content */
+#main-content {
+    display: none; /* Hide initially */
+}
